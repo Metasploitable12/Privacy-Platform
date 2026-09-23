@@ -1,0 +1,114 @@
+# Source-of-truth RBAC matrix. Seeded into the roles/permissions tables on
+# backend startup (see app/core/rbac.py:seed_rbac_from_yaml). Edit this file
+# and restart the backend to change permissions — never hard-code role
+# checks in route handlers; always check a permission name.
+
+roles:
+  - SUPER_ADMIN
+  - PRIVACY_ADMIN
+  - DPO
+  - PRIVACY_ANALYST
+  - BUSINESS_OWNER
+  - PROCESSING_OWNER
+  - SECURITY_REVIEWER
+  - LEGAL_REVIEWER
+  - VENDOR_MANAGER
+  - AUDITOR
+  - READ_ONLY_USER
+
+permissions:
+  ROPA_VIEW:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+    - PRIVACY_ANALYST
+    - BUSINESS_OWNER
+    - PROCESSING_OWNER
+    - AUDITOR
+    - READ_ONLY_USER
+  ROPA_CREATE:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+    - PRIVACY_ANALYST
+    - BUSINESS_OWNER
+  ROPA_EDIT:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+    - PRIVACY_ANALYST
+    - BUSINESS_OWNER
+    - PROCESSING_OWNER
+  ROPA_APPROVE:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+  ROPA_DELETE:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+  ROPA_EXPORT:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+    - PRIVACY_ANALYST
+    - AUDITOR
+
+  ASSET_VIEW:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+    - PRIVACY_ANALYST
+    - SECURITY_REVIEWER
+    - AUDITOR
+    - READ_ONLY_USER
+  ASSET_CREATE:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - PRIVACY_ANALYST
+  ASSET_EDIT:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - PRIVACY_ANALYST
+
+  EVIDENCE_VIEW:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+    - PRIVACY_ANALYST
+    - SECURITY_REVIEWER
+    - LEGAL_REVIEWER
+    - AUDITOR
+  EVIDENCE_UPLOAD:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+    - PRIVACY_ANALYST
+  EVIDENCE_DELETE:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+
+  AUDIT_LOG_VIEW:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+    - AUDITOR
+
+  REPORT_EXPORT:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+    - DPO
+    - PRIVACY_ANALYST
+    - AUDITOR
+
+  ADMIN_CONFIGURE:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+
+  USER_MANAGE:
+    - SUPER_ADMIN
+    - PRIVACY_ADMIN
+
+# Note: DPIA_*, INCIDENT_*, VENDOR_*, DSR_* etc. from the full RBAC matrix
+# in docs/architecture.md are intentionally omitted here — those modules
+# aren't implemented in this Phase 1 scaffold yet. Add them here when the
+# corresponding module is built, following the same pattern.
